@@ -14,7 +14,7 @@ public class User{
     private String emailid;
 
     public User(String name, String phoneno, String emailid){
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.phoneno = phoneno;
         this.emailid = emailid;

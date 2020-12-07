@@ -19,7 +19,7 @@ public class Note {
     private Journal journal; 
 
     public Note(String title, String contents, Date createdDate, Journal j){
-        this.id = UUID.randomUUID();
+        this.noteid = UUID.randomUUID().toString();
         this.title = title;
         this.contents = contents;
         this.createdDate = createdDate;

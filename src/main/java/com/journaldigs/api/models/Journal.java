@@ -18,7 +18,7 @@ public class Journal {
     private User owner;
 
     public Journal(String title, Date createdDate, User u){
-        this.journalid = UUID.randomUUID();
+        this.journalid = UUID.randomUUID().toString();
         this.title = title;
         this.createdDate = createdDate;
         this.owner = u;
@@ -42,9 +42,5 @@ public class Journal {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public List<Notes> getNotes() {
-        return this.notes;
     }
 }
