@@ -11,14 +11,24 @@ public class User{
     private String id;
     private String name;
     private String phoneno;
-    private String emailid;
+    private String email;
+    private String password;
 
-    public User(String name, String phoneno, String emailid){
+    public User(String name, String phoneno, String email, String password){
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.phoneno = phoneno;
-        this.emailid = emailid;
+        this.email = email;
+        this.password = password;
     }
+
+    public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
     public String getId() {
         return this.id;
@@ -41,11 +51,11 @@ public class User{
     }
 
     public String getEmailid() {
-        return this.emailid;
+        return this.email;
     }
 
     public void setEmailid(String emailid) {
-        this.emailid = emailid;
+        this.email = emailid;
     }
 
 }
