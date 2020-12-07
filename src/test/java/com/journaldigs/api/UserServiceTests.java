@@ -2,7 +2,10 @@ package com.journaldigs.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
+
+import java.util.Map;
 
 import com.journaldigs.api.databases.UserDB;
 import com.journaldigs.api.models.User;
@@ -22,16 +25,30 @@ public class UserServiceTests {
     private UserDB userDB;
 
     @Test
-    public void setUpContext(){
-        String testEmail = "test@gmail.com";
-        when(userDB.getUserByEmail(testEmail)).thenReturn(new User("TestUser", "9822343433", testEmail, "Passkey12"));
+    public void signupTest() {
+        Map<String, String> response = userService.Signup("name", "9822222222", "email@domain.com", "password");
+        System.out.println("SIGNUP TEST RES: " +userDB.getUserByEmail("email@domain.com"));
+        assertNotNull(response);
+        assertEquals(response.get("status"), "OK");
     }
 
     @Test
-    public void insertUserTest() {
-        String id = userService.insertNewUser("name", "9092930023", "emailid@domain.com", "password");
-        System.out.println("GeneratedID: " + id);
-        assertNotNull(id);
+    public void loginTestSuccess() {
+        when(userDB.getUserByEmail("email@domain.com"))
+                    .thenReturn(new User("name", "9822222222", "email@domain.com", "password"));
+
+        Map<String, String> response = userService.Login("email@domain.com", "password");
+        assertNotNull(response);
+        assertEquals(response.get("status"), "OK");
+        assertNotNull(response.get("token"));
+    }
+
+    @Test
+    public void loginTestFailure(){
+        Map<String, String> response = userService.Login("email@domain.com", "wrongpassword");
+        assertNotNull(response);
+        assertEquals(response.get("status"), "FAIL");
+        assertNull(response.get("token"));
     }
     
 }
