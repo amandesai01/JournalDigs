@@ -18,6 +18,10 @@ public class Note {
     @ManyToOne
     private Journal journal; 
 
+    public Note(){
+        super();
+    }
+
     public Note(String title, String contents, Date createdDate, Journal j){
         this.noteid = UUID.randomUUID().toString();
         this.title = title;

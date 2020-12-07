@@ -17,6 +17,10 @@ public class Journal {
     @ManyToOne
     private User owner;
 
+    public Journal(){
+        super();
+    }
+
     public Journal(String title, Date createdDate, User u){
         this.journalid = UUID.randomUUID().toString();
         this.title = title;

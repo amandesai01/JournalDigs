@@ -14,6 +14,10 @@ public class User{
     private String email;
     private String password;
 
+    public User(){
+        super();
+    }
+
     public User(String name, String phoneno, String email, String password){
         this.id = UUID.randomUUID().toString();
         this.name = name;
