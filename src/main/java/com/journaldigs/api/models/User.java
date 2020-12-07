@@ -1,4 +1,4 @@
-package main.java.com.journaldigs.api.models;
+package com.journaldigs.api.models;
 
 import java.util.UUID;
 
