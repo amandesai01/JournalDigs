@@ -17,6 +17,10 @@ public class Journal {
     @ManyToOne
     private User owner;
 
+    public User getOwner() {
+        return this.owner;
+    }
+
     public Journal(){
         super();
     }
