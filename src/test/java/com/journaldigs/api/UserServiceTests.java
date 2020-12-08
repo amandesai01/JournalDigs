@@ -27,7 +27,6 @@ public class UserServiceTests {
     @Test
     public void signupTest() {
         Map<String, String> response = userService.Signup("name", "9822222222", "email@domain.com", "password");
-        System.out.println("SIGNUP TEST RES: " +userDB.getUserByEmail("email@domain.com"));
         assertNotNull(response);
         assertEquals(response.get("status"), "OK");
     }
