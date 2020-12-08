@@ -18,6 +18,10 @@ public class Note {
     @ManyToOne
     private Journal journal; 
 
+    public Journal getJournal() {
+        return this.journal;
+    }
+
     public Note(){
         super();
     }
