@@ -42,7 +42,7 @@ public class NotesService {
         }
     }
 
-    public Map<String, Object> getNote(String noteid, String userid){
+    public Map<String, Object> getNote(String noteid, String journalid, String userid){
         Map<String, Object> response = new HashMap<>();
         try {
             Note n = noteDB.findById(noteid).get();
@@ -82,7 +82,7 @@ public class NotesService {
         }
     }
 
-    public Map<String, String> deleteNote(String userid, String noteid){
+    public Map<String, String> deleteNote(String userid, String noteid, String journalid){
         Map<String, String> response = new HashMap<>();
         try {
             Note n = noteDB.findById(noteid).get();
