@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.journaldigs.api.databases.JournalDB;
+import com.journaldigs.api.databases.UserDB;
 import com.journaldigs.api.models.Journal;
 import com.journaldigs.api.models.User;
 
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Service;
 public class JournalService {
     @Autowired
     private JournalDB journalDB;
+
+    @Autowired
+    private UserDB userDB;
 
     public Map<String, String> deleteJournal(String userid, String id){
         Map<String, String> response = new HashMap<>();
@@ -36,10 +40,10 @@ public class JournalService {
         }
     }
 
-    public Map<String, Object> getJournal(User u, String id){
+    public Map<String, Object> getJournal(String userid, String id){
         Map<String, Object> response = new HashMap<>();
         try {
-            List<Journal> j = journalDB.findByUserId(u.getId());
+            List<Journal> j = journalDB.findByUserId(userid);
             for (Journal journal : j) {
                 if(journal.getJournalid().equals(id)){
                     response.put("status", "OK");
@@ -57,10 +61,10 @@ public class JournalService {
         }
     }
 
-    public Map<String, Object> getAllJournals(User u){
+    public Map<String, Object> getAllJournals(String userid){
         Map<String, Object> response = new HashMap<>();
         try {
-            List<Journal> j = journalDB.findByUserId(u.getId());
+            List<Journal> j = journalDB.findByUserId(userid);
             response.put("status", "ok");
             response.put("data", j);
             return response;
@@ -71,9 +75,9 @@ public class JournalService {
         }
     }
 
-    public Map<String, String> createJournal(User u, String title){
+    public Map<String, String> createJournal(String userid, String title){
         Map<String, String> response = new HashMap<>();
-        Journal j = new Journal(title, new Date(), u);
+        Journal j = new Journal(title, new Date(), userDB.findById(userid).get());
         try {
             journalDB.save(j);
             response.put("status", "OK");
