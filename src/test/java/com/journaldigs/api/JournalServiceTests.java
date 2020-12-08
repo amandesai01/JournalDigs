@@ -34,7 +34,7 @@ public class JournalServiceTests {
     @Test
     public void createJournalAddTest(){
         User u = new User("name", "9822222222", "email@domain.com", "password");
-        Map<String, String> res = journalService.createJournal(u, "New Journal");
+        Map<String, String> res = journalService.createJournal(u.getId(), "New Journal");
         assertEquals(res.get("status"), "OK");
         assertNotNull(res.get("journalid"));
         assertNotNull(res.get("createddate"));
@@ -44,13 +44,13 @@ public class JournalServiceTests {
     public void deleteJournalTest() {
         User u = new User("name", "9822222222", "email@domain.com", "password");
         Journal target = new Journal("title3", new Date(), u);
-        when(journalDB.findByUserId(u.getId())).thenReturn(Arrays.asList(
+        when(journalDB.findByOwnerId(u.getId())).thenReturn(Arrays.asList(
             new Journal("title1", new Date(), u),
             new Journal("title2", new Date(), u),
             target,
             new Journal("title4", new Date(), u)
         ));
-        Map<String, String> res = journalService.deleteJournal(u, target.getJournalid());
+        Map<String, String> res = journalService.deleteJournal(u.getId(), target.getJournalid());
         assertEquals(res.get("status"), "OK");
     }
 
@@ -58,13 +58,13 @@ public class JournalServiceTests {
     public void getJournalTest() {
         User u = new User("name", "9822222222", "email@domain.com", "password");
         Journal target = new Journal("title3", new Date(), u);
-        when(journalDB.findByUserId(u.getId())).thenReturn(Arrays.asList(
+        when(journalDB.findByOwnerId(u.getId())).thenReturn(Arrays.asList(
             new Journal("title1", new Date(), u),
             new Journal("title2", new Date(), u),
             target,
             new Journal("title4", new Date(), u)
         ));
-        Map<String, Object> res = journalService.getJournal(u, target.getJournalid());
+        Map<String, Object> res = journalService.getJournal(u.getId(), target.getJournalid());
         assertNotNull(res.get("data"));
         assertEquals(res.get("status"), "OK");
         assertEquals(res.get("data"), target);
@@ -75,13 +75,13 @@ public class JournalServiceTests {
         User u = new User("name", "9822222222", "email@domain.com", "password");
         User u2 = new User("name2", "9822222222", "email2@domain.com", "password");
         Journal target = new Journal("title3", new Date(), u);
-        when(journalDB.findByUserId(u.getId())).thenReturn(Arrays.asList(
+        when(journalDB.findByOwnerId(u.getId())).thenReturn(Arrays.asList(
             new Journal("title1", new Date(), u),
             new Journal("title2", new Date(), u),
             target,
             new Journal("title4", new Date(), u)
         ));
-        Map<String, Object> res = journalService.getJournal(u2, target.getJournalid());
+        Map<String, Object> res = journalService.getJournal(u2.getId(), target.getJournalid());
         assertNull(res.get("data"));
         assertEquals(res.get("status"), "FAIL");
     }

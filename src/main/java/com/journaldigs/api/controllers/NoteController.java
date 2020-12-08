@@ -39,6 +39,6 @@ public class NoteController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/journal/{journalid}/notes/new")
     public Map<String, String> newNote(@RequestHeader(value="token") String token, @PathVariable String journalid, @RequestBody NewNoteForm newNoteForm){
-        return notesService.createNewNote(newNoteForm.title, newNoteForm.contents, newNoteForm.journalid, jwtService.decode(token));
+        return notesService.createNewNote(newNoteForm.title, newNoteForm.contents, journalid, jwtService.decode(token));
     }
 }

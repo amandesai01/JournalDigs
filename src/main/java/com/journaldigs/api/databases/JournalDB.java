@@ -7,5 +7,5 @@ import java.util.List;
 import com.journaldigs.api.models.Journal;
 
 public interface JournalDB extends CrudRepository<Journal, String> {
-    public List<Journal> findByUserId(String uid);
+    public List<Journal> findByOwnerId(String uid);
 }
