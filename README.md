@@ -31,3 +31,5 @@ A Centralised Place to Create And Host Your Journals. (APIs Only)
   * NoteId (Auto Generated)
   * Title
   * Content
+
+This Project was made within 48hrs, from scratch (including Learning SpringBoot, Setting up CI/CD, Writting Unittests, Developing above structure).
