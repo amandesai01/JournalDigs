@@ -17,10 +17,10 @@ public class JournalService {
     @Autowired
     private JournalDB journalDB;
 
-    public Map<String, String> deleteJournal(User u, String id){
+    public Map<String, String> deleteJournal(String userid, String id){
         Map<String, String> response = new HashMap<>();
         try {
-            List<Journal> data = journalDB.findByUserId(u.getId());
+            List<Journal> data = journalDB.findByUserId(userid);
             for (Journal journal : data) {
                 if(journal.getJournalid().equals(id)){
                     journalDB.deleteById(id);
